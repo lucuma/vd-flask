@@ -1,0 +1,37 @@
+server {
+    server_name example.com;
+    return 301 $scheme://www.example.com$request_uri;
+}
+
+server {
+    listen 80;
+    server_name www.example.com;
+    root /var/www/[[ project_name ]];
+
+    location /favicon.ico {
+        alias /var/www/[[ project_name ]]/webapp/static/favicon.ico;
+        expires 1d;
+        access_log off;
+    }
+
+    location /robots.txt {
+        alias /var/www/[[ project_name ]]/webapp/static/robots.txt;
+        expires 1d;
+    }
+
+    location /humans.txt {
+        alias /var/www/[[ project_name ]]/webapp/static/humans.txt;
+        expires 1d;
+    }
+
+    location /fbchannel.html{
+        alias /var/www/[[ project_name ]]/webapp/static/fbchannel.html;
+        expires 1d;
+        access_log off;
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:///tmp/[[ project_name ]].sock;
+    }
+}

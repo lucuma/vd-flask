@@ -1,0 +1,85 @@
+# VPS Deployment
+
+The recommended setup is to use NGINX and [uWSGI Emperor](http://uwsgi-docs.readthedocs.org/en/latest/WSGIquickstart.html).
+
+When you start uWSGI in Emperor mode, you give it a directory to watch that contains all of your uWSGI config files. If a new file is added, the emperor process reads it and spins up loyal worker processes to handle requests. If a config file is touched or modified, the emperor will gracefully restart the associated worker processes. And if a config file is removed, the emperor will kill the relevant workers. How cool is that?
+
+## Installation
+
+First, you'll need to install the latest versions of Nginx uWSGI. I'll assume an Ubuntu install, but you should be able to modify this if needed.
+
+    $  sudo apt-get install nginx
+
+It might be better to install uWSGI via `pip` so you get the most recent verson:
+
+    $  sudo easy install pip
+    $  sudo pip install uwsgi
+
+If you're on a recent version of Ubuntu, this should get you Nginx 1.1.19 and uWSGI 1.9.x.
+
+## Upstart and uWSGI
+
+Next, you'll need an Upstart script for uWSGI: `/etc/init/uwsgi.conf`
+
+    description "uWSGI"
+    start on runlevel [2345]
+    stop on runlevel [06]
+    respawn
+
+    env UWSGI=/usr/bin/uwsgi
+    env LOGTO=/var/log/uwsgi/emperor.log
+
+    exec $UWSGI --master --emperor /etc/uwsgi/apps-enabled --die-on-term --uid www-data --gid www-data --logto $LOGTO
+
+You may need to create the appropriate directories:
+
+    $  sudo mkdir -p /var/log/uwsgi
+    $  sudo mkdir -p /etc/uwsgi/apps-enabled
+
+Now you should be able to get uWSGI started:
+
+    $  sudo service uwsgi start
+
+The emperor process's logs will go to `/var/log/uwsgi/emperor.log`, so if you run into any errors, check there.
+
+## Getting Your App Running
+
+The code of your app goes to `/var/www/[[ project_name ]]`.
+
+    $  git clone your-repo-url /var/www/[[ project_name ]]
+
+Create an empty database, a user to manage it and either:
+
+a. set the environment variables readed in this file:
+
+    /var/www/[[ project_name ]]/webapp/config/production.py
+
+b. create a
+    
+    /var/www/[[ project_name ]]/webapp/config/local.py
+
+and redefine the relevant settings there
+
+After that, install all the app requirements in a virtualenv and initialize the database:
+
+    $  cd /var/www/[[ project_name ]]
+    $  virtualenv env
+    $  source env/bin/activate
+    $  pip install -r requirements.txt
+    $  python manage.py syncdb
+
+That should be all we need to get set up. uWSGI and Nginx are already running, so let's enable the app and the site.
+
+    $  sudo ln -s /var/www/[[ project_name ]]/conf/uwsgi.ini /etc/uwsgi/apps-enabled/[[ project_name ]].ini
+
+The uWSGI Emperor will see the new file (a symlink to the real config file), spin up new processes, and point it at that config.
+
+Next, we enable the Nginx site.
+
+    $  sudo ln -s /var/www/[[ project_name ]]/conf/nginx.conf /etc/nginx/sites-enabled/[[ project_name ]].conf
+    $  sudo service nginx restart
+
+(Nginx requires a reload to pick up config changes.)
+
+If the DNS entries are properly configured, we should start serving our new site.
+

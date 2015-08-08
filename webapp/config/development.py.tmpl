@@ -1,0 +1,12 @@
+# coding=utf-8
+from .common import *
+
+
+DEBUG = True
+RELOAD = True
+STATIC_DEBUG = DEBUG
+
+SECRET_KEY = 'secret key is not very secret in development'
+
+#SQLALCHEMY_URI = 'sqlite:///db.sqlite'
+SQLALCHEMY_URI = 'postgresql://127.0.0.1/[[ project_name ]]'

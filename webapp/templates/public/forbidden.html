@@ -1,0 +1,24 @@
+{% extends "public/layout.html" %}
+
+{% block title %}No tienes permiso para ver esta página{% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <section class="titlezone">
+    <h1>No tienes permiso para ver esta página</h1>
+  </section>
+  <section>
+    <div class="row-fluid">
+       <p>Si crees que esto es un error, <a href="mailto:info@lucumalabs.com">por favor avísanos</a> para solucionarlo (no olvides incluir esta dirección en tu mensaje).
+      <p><b>Gracias.</b></p>
+    </div>
+  </section>
+</div>
+<!--
+WARNING:
+If this page is smaller than 512 bytes, then Internet Explorer and Chrome|Chromium will display their own built-in 5XX page and the Internet will be flooded with ones and zeros. Hence, the following text:
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet elit ante. Nam eget sem felis, non varius lorem. Phasellus faucibus lacinia luctus. In faucibus sapien ac velit venenatis tempus. Sed non tortor nec tellus volutpat rutrum. Phasellus quis lacus est. Aenean hendrerit vulputate quam vitae varius. Vestibulum feugiat luctus erat quis dignissim. Suspendisse potenti. Cras vitae ullamcorper nunc. Proin vel risus diam, vitae interdum risus. Aenean neque quam, aliquam id commodo sed, consectetur at metus. Aenean malesuada eleifend lacus, in dignissim tellus sagittis eu. Duis venenatis faucibus purus, at viverra mauris ullamcorper porta. Pellentesque vel erat ac risus imperdiet varius.
+-->
+{% endblock %}

@@ -1,0 +1,10 @@
+# https://uwsgi-docs.readthedocs.org/en/latest/Options.html
+[uwsgi]
+base = /var/www/[[ project_name ]]
+protocol = uwsgi
+home = %(base)/env
+chdir = %(base)
+module = webapp.main:app
+env = APP_ENV=production
+socket = /tmp/[[ project_name ]].sock
+uwsgi-socket = /tmp/[[ project_name ]].sock

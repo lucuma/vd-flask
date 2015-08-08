@@ -1,0 +1,25 @@
+# This file collects all required third-party libraries that are needed
+# to run this project in development or production.
+# Do not use this file directly, instead, see "dev.txt" or "prod.txt".
+#
+pip>=6.1  # Solo pip 6.1+ tiene soporte para definir las versiones con ~=
+alembic
+Allspeak
+Authcode
+Baker
+boto
+Flask
+flask_debugtoolbar
+itsdangerous
+MailShake
+Moar
+Pillow
+psycopg2
+python-dateutil
+pytz
+simplejson
+Solution
+SQLAlchemy
+SQLAlchemy-Searchable
+SQLAlchemy-Utils
+SQLAlchemy-Wrapper>=1.5.1

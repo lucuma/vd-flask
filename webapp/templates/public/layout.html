@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]> <html lang="es" class="ie ie8" > <![endif]-->
+<!--[if IE 9 ]> <html lang="es" class="ie ie9" > <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="es"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1">
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.ico' | static_url }}">
+  <script src="{{ 'scripts/modernizr.custom.js' | static_url }}"></script>
+
+  {% if config.STATIC_DEBUG -%}
+  <link rel="stylesheet" href="{{ 'styles/main.css' | static_url }}">
+  {%- else -%}
+  <link rel="stylesheet" href="{{ 'styles/styles.min.css' | static_url }}">
+  {%- endif %}
+
+  <!--[if lte IE 8]><link rel="stylesheet" href="{{ 'styles/ie8.css' | static_url }}"><![endif]-->
+</head>
+<body class="{% block bodyclass %}{% endblock %}">
+  {% block content %}{% endblock %}
+
+  {% block vars %}{% endblock %}
+  {% if config.STATIC_DEBUG -%}
+  <script src="{{ 'scripts/jquery.min.js' | static_url }}"></script>
+  <script src="{{ 'scripts/subforms.js' | static_url }}"></script>
+  <script src="{{ 'scripts/main.js' | static_url }}"></script>
+  {%- else -%}
+  <script src="{{ 'scripts/scripts.min.js' | static_url }}"></script>
+  {%- endif %}
+  {% block scripts %}{% endblock %}
+</body>
+</html>

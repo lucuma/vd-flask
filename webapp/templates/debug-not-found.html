@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <title>Page not found</title>
+  <style>
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #333;
+  background-color: #fdfdfd;
+}
+h1 {
+  margin: 0;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 32px;
+  font-weight: normal;
+  line-height: 36px;
+  color: inherit;
+  text-rendering: optimizelegibility;
+  padding: 0.4em 0;
+}
+p {
+  margin: 5px 0 10px;
+}
+#header {
+  padding: 5px 50px;
+  background-color: #ffc;
+  color: black;
+  margin: 0;
+}
+.method, .url {
+  font-size: 16px;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.method {
+  color: #666;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 20px;
+}
+.endpoint {
+  font-style: italic;
+  margin-left: 30px;
+}
+.url {
+  color: #111;
+}
+#content {
+  padding: 30px 50px;
+  margin: 0;
+  font-size: 20px;
+}
+#content.notfound {
+  font-size: inherit;
+}
+table {
+  border:1px solid #ccc;
+  border-collapse:collapse;
+  width:100%;
+  background-color:#fff;
+  margin-top:0.8em;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.5em;
+  color: #000;
+}
+tbody td,
+tbody th {
+  vertical-align:top;
+  padding:2px 3px;
+}
+thead th {
+  padding:1px 6px 1px 3px;
+  text-align:left;
+  font-weight:bold;
+  font-size:14px;
+}
+tbody th {
+  width:12em;
+  text-align:right;
+  color: #666;
+  padding-right:.5em;
+}
+tbody > tr:nth-of-type(odd) {
+  background-color: rgb(249, 249, 249);
+}
+tbody > tr > td, tbody > tr > th,
+thead > tr > td, thead > tr > th {
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(221, 221, 221);
+}
+  </style>
+</head>
+<body>
+  <div id="header" class="notfound">
+    <h1>Page not found</h1>
+    <p>
+      <span class="url">{{ request.url|e }}</span>
+      <span class="method">[{{ request.method }}]</span>
+    </p>
+    {% if request.form %}<p class="reqdata">{{ request.form }}</p>{% endif %}
+  </div>
+  <div id="content" class="notfound">
+    <p>We tried these URL rules, but the current URL didn’t match any of them.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>URL route</th>
+          <th>Endpoint name</th>
+          <th>HTTP methods</th>
+          <th>Is alias</th>
+          <th>Redirect to</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if routes %}
+          {% for route in routes|sort(attribute='rule') %}
+            <tr>
+              <td>{{ route.rule }}</td>
+              <td>{{ route.endpoint }}</td>
+              <td>{{ route.methods|sort|join(', ') }}</td>
+              <td>{{ route.alias }}</td>
+              <td>{{ route.redirect_to or '' }}</td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td>No routes have been configured.</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+  <!--
+  WARNING:
+  If a custom "HTTP 404: Not found" page like this is smaller than 512 bytes, then Internet Explorer and Chrome|Chromium will display their own built-in 404 page and the robots will take over the world. Hence, the following text:
+
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet elit ante. Nam eget sem felis, non varius lorem. Phasellus faucibus lacinia luctus. In faucibus sapien ac velit venenatis tempus. Sed non tortor nec tellus volutpat rutrum. Phasellus quis lacus est. Aenean hendrerit vulputate quam vitae varius. Vestibulum feugiat luctus erat quis dignissim. Suspendisse potenti. Cras vitae ullamcorper nunc. Proin vel risus diam, vitae interdum risus. Aenean neque quam, aliquam id commodo sed, consectetur at metus. Aenean malesuada eleifend lacus, in dignissim tellus sagittis eu. Duis venenatis faucibus purus, at viverra mauris ullamcorper porta. Pellentesque vel erat ac risus imperdiet varius.
+  -->
+</body>
+</html>

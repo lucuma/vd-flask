@@ -1,0 +1,34 @@
+.PHONY: all
+
+clean: clean-pyc
+	rm -rf build
+	rm -rf dist
+	rm -rf *.egg-info
+	find . -name '.DS_Store' -delete
+	rm -rf tests/__pycache__
+
+clean-pyc:
+	find . -name '*.pyc' -delete
+	find . -name '*.pyo' -delete
+	find . -name '*~' -delete
+
+install:
+	pip install -r requirements/dev.txt
+	createdb [[ project_name ]] || true
+	python manage.py syncdb
+	python manage.py load_data
+
+deploy:
+	pip install -r requirements/prod.txt
+	python manage.py set_env production
+	python manage.py syncdb
+	python manage.py load_data
+
+run:
+  python manage.py run
+
+assets:
+	python manage.py assets build
+
+test:
+	py.test -x tests/

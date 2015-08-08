@@ -1,0 +1,14 @@
+# coding=utf-8
+from .development import *
+
+
+DEBUG = False
+RELOAD = False
+STATIC_DEBUG = DEBUG
+
+SECRET_KEY = 'secret key is not very secret while testing'
+
+SQLALCHEMY_URI = 'postgresql://127.0.0.1/[[ project_name ]]-test'
+
+MAILER_CLASS = 'ToMemoryMailer'
+MAILER_SETTINGS = {}

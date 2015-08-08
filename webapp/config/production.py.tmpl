@@ -1,0 +1,28 @@
+# coding=utf-8
+import os
+
+from .common import *
+
+
+DEBUG = False
+RELOAD = False
+STATIC_DEBUG = DEBUG
+
+SECRET_KEY = os.getenv('[[ project_name|upper ]]_SECRET_KEY')
+
+SQLALCHEMY_URI = 'postgresql://[[ project_name ]]:[[ project_name ]]@127.0.0.1/[[ project_name ]]'
+
+# SERVER_NAME = 'example.com'
+# DEFAULT_SUBDOMAIN = 'www'
+
+MAILER_CLASS = 'AmazonSESMailer'
+MAILER_SETTINGS = {
+    'aws_access_key_id': os.getenv('[[ project_name|upper ]]_SECRET_KEY'),
+    'aws_secret_access_key': os.getenv('[[ project_name|upper ]]_SECRET_KEY'),
+    'return_path': 'admin@example.com',  # Mailer admin
+}
+
+LOGGING_CONFIG['root']['handlers'] = ["console", "info_file_handler", "error_file_handler"]
+LOGGING_CONFIG['root']['level'] = 'ERROR'
+
+MEMCHACHED_SERVERS = ['127.0.0.1:11211']

@@ -1,0 +1,111 @@
+# coding=utf-8
+from os.path import dirname, join, realpath
+
+
+DEBUG = True
+RELOAD = True
+STATIC_DEBUG = DEBUG
+SQLALCHEMY_ECHO = False
+
+SITE_NAME = '[[ project_name ]]'
+SESSION_COOKIE_NAME = '[[ project_name ]]'
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = False
+
+STATIC_URL = '/static'
+UPLOADS_URL = '/static/media'
+
+BASE_PATH = realpath(join(dirname(__file__), '..'))
+STATIC_PATH = join(BASE_PATH, 'static')
+UPLOADS_PATH = join(STATIC_PATH, 'media')
+
+TEMPLATES_PATH = join(BASE_PATH, 'templates')
+
+# Internationalization config
+LOCALES_PATH = join(BASE_PATH, 'locales')
+DEFAULT_LOCALE = 'es'
+DEFAULT_TIMEZONE = 'America/Lima'
+
+MB = 1024 * 1024
+
+# Soft limits for uploaded files
+# Ignored unless you use them
+MAX_FILE_SIZE = 2 * MB
+MAX_IMAGE_SIZE = 2 * MB
+
+# Hard limit for uploaded files
+MAX_CONTENT_LENGTH = 50 * MB
+
+# The maximum size for regular form data (not files)
+MAX_FORM_MEMORY_SIZE = 10 * MB
+
+AUTH_SETTINGS = {
+    'sign_in_redirect': '/',
+    'sign_out_redirect': '/',
+
+    'url_sign_in': '/sign-in/',
+    'url_sign_out': '/sign-out/',
+    'url_reset_password': '/reset-password/',
+    'url_change_password': '/change-password/',
+
+    'password_minlen': 5,
+
+    'template_sign_in': 'auth/sign-in.html',
+    'template_sign_out': None,
+    'template_reset': 'auth/reset-password.html',
+    'template_reset_email': 'auth/reset-password-email.html',
+    'template_change_password': 'auth/change-password.html',
+}
+
+MAILER_FROM = 'no_reply@example.com'
+MAILER_CLASS = 'ToConsoleMailer'
+MAILER_SETTINGS = {}
+
+LOGGING_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "%(message)s",
+        },
+        "verbose": {
+            "format": "%(asctime)s| %(name)s |%(levelname)s| %(message)s",
+        },
+    },
+
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "simple",
+            "stream": "ext://sys.stdout",
+        },
+
+        "info_file_handler": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "INFO",
+            "formatter": "verbose",
+            "filename": "logs/info.log",
+            "maxBytes": "10485760",
+            "backupCount": "20",
+            "encoding": "utf8",
+        },
+
+        "error_file_handler": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "level": "ERROR",
+            "formatter": "verbose",
+            "filename": "logs/errors.log",
+            "maxBytes": "10485760",
+            "backupCount": "20",
+            "encoding": "utf8",
+        },
+    },
+
+    "root": {
+        "level": "INFO",
+        "handlers": ["console"],
+    },
+}
+
+MEMCHACHED_SERVERS = []

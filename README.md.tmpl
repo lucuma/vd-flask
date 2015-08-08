@@ -1,0 +1,70 @@
+
+# Awesome app
+
+Features:
+
+- User model, login and reset password views, powered by [Authcode](https://github.com/lucuma/authcode).
+- A `manage.py` script powered by [Baker](https://bitbucket.org/mchaput/baker/wiki/Home)
+- [Alembic](http://alembic.readthedocs.org/en/latest/) setup for database migrations.
+- Built-in localization (and optional internationalization) thanks to [Allspeak](https://github.com/lucuma/allspeak)
+- NGINX and uWSGI configuration files for VPS deployment
+- py.test scaffolding for testing
+
+
+*NOTE*:  This project does not use the `create_app()` / `current_app` pattern. Instead, the loaded settings depends of an environment variable named `APP_ENV` or, alternatively, the value of the file `.APP_ENV` if exists.
+
+
+## Quickstart
+
+1. Create a virtualenv
+2. make install
+3. python manage.py run
+
+
+## Database Migrations
+
+This app uses [Alembic](http://alembic.readthedocs.org/en/latest/) to manage database migrations. The configuration uses the `SQLALCHEMY_URI` setting, so it will work just fine in development as in production.
+
+Use this command every time you or somebody in your team has updated the database schema:
+
+    $  python manage.py syncdb
+
+https://sqlalchemy-searchable.readthedocs.org/en/latest/alembic_migrations.html
+
+
+### Manage Changes
+
+The usual thing to do when updating a table schema is to autogenerate the migrations with the following command:
+
+    $  alembic revision --autogenerate -m "Added some column"
+
+Just bear in mind that autogenerating migrations isn't the end all be all command. I does not account for everything that can be done during a migration. For instance, if you want to add indexes on particular fields you'll need to write that in yourself.
+
+See the official documentation about autogenerate here: http://alembic.readthedocs.org/en/latest/tutorial.html#auto-generating-migrations
+
+If you add anything by hand remember to modify both the upgrade and downgrade methods.
+
+Do:
+
+    $  python manage.py syncdb
+
+to run the generated migration on your local database.
+
+
+### Manually Run the Migrations
+
+    $  alembic upgrade head
+
+
+### Reset Migrations
+
+To prune old migration files, simply delete the files. Then, in the earliest, still-remaining migration file, set down_revision to None:
+
+    # replace this:
+    #down_revision = '290696571ad2'
+
+    # with this:
+    down_revision = None
+
+That file now becomes the “base” of the migration series.
+

@@ -1,0 +1,27 @@
+{% extends "auth/layout.html" %}
+
+{% block title %}Entrar{% endblock %}
+
+{% block content %}
+<form action="" method="POST" class="sign-in">
+  <div class="banner"></div>
+  <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+  {% if error -%}
+  <fieldset class="error">Usuario o contraseña incorrecta.</fieldset>
+  {%- endif %}
+  <fieldset>
+    <input type="text" name="login" value="{{ credentials.login|e }}"
+      size="20" maxlength="254" tabindex="1" placeholder="usuario"
+      autocorrect="off" autocapitalize="off" autofocus>
+    <input type="password" name="password" 
+      size="20" maxlength="254" tabindex="2" placeholder="contraseña"
+      autocorrect="off" autocapitalize="off">
+  </fieldset>
+  <fieldset class="actions">
+    {% if auth.url_reset_password -%}
+    <a href="{{ auth.url_reset_password }}" tabindex="4">¿Olvidaste tu contraseña?</a>
+    {%- endif %}
+    <button class="btn" type="submit" tabindex="3">Entrar &raquo;</button>
+  </fieldset> 
+</form>
+{% endblock %}

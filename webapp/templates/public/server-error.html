@@ -1,0 +1,24 @@
+{% extends "public/layout.html" %}
+
+{% block title %}Error{% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <section class="titlezone">
+    <h1>Error del sistema</h1>
+  </section>
+  <section>
+    <div class="row-fluid">
+      <p>El servidor encontró un error y fue incapaz de completar tu solicitud.</p>
+      <p>O bien el servidor está sobrecargado o hay un error en la aplicación. Por favor, <a href="javascript:history.back();">regresa e inténtalo nuevamente</a>.</p>
+    </div>
+  </section>
+</div>
+<!--
+WARNING:
+If this page is smaller than 512 bytes, then Internet Explorer and Chrome|Chromium will display their own built-in 5XX page and the ozone layer will evaporate. Hence, the following text:
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet elit ante. Nam eget sem felis, non varius lorem. Phasellus faucibus lacinia luctus. In faucibus sapien ac velit venenatis tempus. Sed non tortor nec tellus volutpat rutrum. Phasellus quis lacus est. Aenean hendrerit vulputate quam vitae varius. Vestibulum feugiat luctus erat quis dignissim. Suspendisse potenti. Cras vitae ullamcorper nunc. Proin vel risus diam, vitae interdum risus. Aenean neque quam, aliquam id commodo sed, consectetur at metus. Aenean malesuada eleifend lacus, in dignissim tellus sagittis eu. Duis venenatis faucibus purus, at viverra mauris ullamcorper porta. Pellentesque vel erat ac risus imperdiet varius.
+-->
+{% endblock %}

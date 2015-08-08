@@ -1,0 +1,26 @@
+{% extends "public/layout.html" %}
+
+{% block title %}Error{% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <section class="titlezone">
+    <h1>Página no encontrada</h1>
+  </section>
+  <section>
+    <div class="row-fluid">
+    <p>La página que estabas buscando ya no está aquí (debe haber sido movida o borrada).</p>
+    <p>Prueba regresando a la <a href="{{ url_for('public.index') }}">página principal</a> y buscando desde ahí.</p>
+    <p>Si crees que esto es un error, <a href="mailto:info@lucumalabs.com">por favor avísanos</a> para solucionarlo (no olvides incluir esta dirección en tu mensaje).
+    <p><b>Gracias.</b></p>
+    </div>
+  </section>
+</div>
+<!--
+WARNING:
+If a custom "HTTP 404: Not found" page like this is smaller than 512 bytes, then Internet Explorer and Chrome|Chromium will display their own built-in 404 page and the robots will take over the world. Hence, the following text.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet elit ante. Nam eget sem felis, non varius lorem. Phasellus faucibus lacinia luctus. In faucibus sapien ac velit venenatis tempus. Sed non tortor nec tellus volutpat rutrum. Phasellus quis lacus est. Aenean hendrerit vulputate quam vitae varius. Vestibulum feugiat luctus erat quis dignissim. Suspendisse potenti. Cras vitae ullamcorper nunc. Proin vel risus diam, vitae interdum risus. Aenean neque quam, aliquam id commodo sed, consectetur at metus. Aenean malesuada eleifend lacus, in dignissim tellus sagittis eu. Duis venenatis faucibus purus, at viverra mauris ullamcorper porta. Pellentesque vel erat ac risus imperdiet varius.
+-->
+{% endblock %}

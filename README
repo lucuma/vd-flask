@@ -1,0 +1,4 @@
+A lucuma-flavored Flask template.
+To install, use https://github.com/lucuma/voodoo and do:
+
+voodoo git@github.com:lucuma/vd-flask.git new_project
