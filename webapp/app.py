@@ -24,7 +24,6 @@ app = Flask(
 )
 
 app.config.from_object(config)
-app.url_map.default_subdomain = config.DEFAULT_SUBDOMAIN
 
 speak = Allspeak(
     config.LOCALES_PATH,
