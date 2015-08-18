@@ -1,4 +1,4 @@
-A heavily opinonated Lucuma-flavored Flask template.
+A heavily opinionated Lucuma-flavored Flask template.
 To install, use https://github.com/lucuma/voodoo:
 
 .. sourcecode:: shell
