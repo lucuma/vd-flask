@@ -27,7 +27,7 @@ This app uses [Alembic](http://alembic.readthedocs.org/en/latest/) to manage dat
 
 Use this command every time you or somebody in your team has updated the database schema:
 
-    $  python manage.py syncdb
+    $  alembig upgrade head
 
 https://sqlalchemy-searchable.readthedocs.org/en/latest/alembic_migrations.html
 
@@ -46,14 +46,9 @@ If you add anything by hand remember to modify both the upgrade and downgrade me
 
 Do:
 
-    $  python manage.py syncdb
+    $  alembig upgrade head
 
 to run the generated migration on your local database.
-
-
-### Manually Run the Migrations
-
-    $  alembic upgrade head
 
 
 ### Reset Migrations

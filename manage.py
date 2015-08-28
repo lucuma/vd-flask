@@ -2,36 +2,11 @@
 from __future__ import print_function
 import io
 import os
-from os.path import dirname, join
 
-from alembic import command
-from alembic.config import Config
 import baker
 
 from webapp.main import app
 from webapp.auth import manage
-
-
-@baker.command
-def syncdb(revision='head'):
-    """Run the database migrations
-    """
-    print('\n-- Updating to the latest revision --')
-    alembic_cfg = Config(join(dirname(__file__), 'alembic.ini'))
-    command.upgrade(alembic_cfg, revision)
-
-    print('\n-- Done. --\n')
-
-
-@baker.command
-def revertdb(revision):
-    """Revert the database to the given revision
-    """
-    print('\n-- Downgrade --')
-    alembic_cfg = Config(join(dirname(__file__), 'alembic.ini'))
-    command.downgrade(alembic_cfg, revision)
-
-    print('\n-- Done. --\n')
 
 
 @baker.command
