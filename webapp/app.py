@@ -3,6 +3,8 @@ from flask import Flask, request
 from allspeak import Allspeak
 from moar import Thumbnailer
 # from moar.engines.wand_engine import WandEngine
+from typogrify.filters import (
+    amp, caps, initial_quotes, smartypants, titlecase, typogrify, widont)
 
 from . import config
 from .helpers.cache import cache
@@ -12,8 +14,6 @@ from .helpers.jinja_includewith import IncludeWith
 from .helpers.static import static_url, upload_url
 from .helpers.templates import active, link_to, format_file_size, dumb_pluralize
 from .helpers.urls import get_current_url
-from .helpers.typogrify import (
-    amp, caps, initial_quotes, smartypants, titlecase, typogrify, widont)
 
 
 app = Flask(

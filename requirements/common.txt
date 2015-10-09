@@ -23,3 +23,4 @@ SQLAlchemy
 SQLAlchemy-Searchable
 SQLAlchemy-Utils
 SQLAlchemy-Wrapper>=1.5.1
+typogrify

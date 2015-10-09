@@ -129,7 +129,7 @@ CHAR_MAP = {
     u'ქ': 'k', u'ღ': 'gh', u'ყ': 'q', u'შ': 'sh', u'ჩ': 'ch',
     u'ც': 'ts', u'ძ': 'dz', u'წ': 'ts', u'ჭ': 'ch', u'ხ': 'kh',
     u'ჯ': 'j', u'ჰ': 'h',
-    }
+}
 
 
 def normalize(s):
@@ -137,10 +137,10 @@ def normalize(s):
         char = m.group()
         return CHAR_MAP.get(char, char)
 
-    s = unicode(s)
+    s = str(s)
     # translate or drop all non-latin1 text
     s = re.sub('[^a-zA-Z0-9\\s\\-]{1}', replace_char, s)
-    return s.encode('ascii', 'ignore')
+    return s.encode('ascii', 'ignore').decode()
 
 
 def slugify(s, space='-', lower=True):
@@ -160,9 +160,9 @@ def slugify(s, space='-', lower=True):
 
 
 if __name__ == '__main__':
-    print "slugify(u'æ') ==", slugify(u'æ')
+    print("slugify(u'æ') ==", slugify(u'æ'))
     assert slugify(u'æ') == 'ae'
-    print "slugify(u'ლ') ==", slugify(u'ლ')
+    print("slugify(u'ლ') ==", slugify(u'ლ'))
     assert slugify(u'ლ') == 'l'
-    print "slugify(u'ῇ') ==", slugify(u'ῇ')
+    print("slugify(u'ῇ') ==", slugify(u'ῇ'))
     assert slugify(u'ῇ') == 'i'
